@@ -9,13 +9,10 @@ import { DvdService } from 'src/app/services/dvd.service';
 })
 export class DvdListComponent {
 
-   // A dvd objektumok tömbje
    dvds?: Dvd[];
-
-   // Az aktuális tutoriál, amelyet kiválasztottunk
+  
    currentdvd: Dvd = {};
  
-   // Az aktuális tutoriál indexe a tömbben
    currentIndex = -1;
  
    // A keresés címe
@@ -24,12 +21,9 @@ export class DvdListComponent {
    constructor(private dvdService: DvdService) { }
  
    ngOnInit(): void {
-     // Az ngOnInit() metódus futása a komponens inicializálásakor
-     // Az összes tutoriál lekérése
      this.retrievedvds();
    }
  
-   // Az összes tutoriál lekérése
    retrievedvds(): void {
      this.dvdService.getAll()
        .subscribe({
@@ -40,21 +34,18 @@ export class DvdListComponent {
          error: (e) => console.error(e)
        });
    }
- 
-   // Lista frissítése
+
    refreshList(): void {
      this.retrievedvds();
      this.currentdvd = {};
      this.currentIndex = -1;
    }
  
-   // Kiválasztott tutoriál beállítása
    setActivedvd(dvd: Dvd, index: number): void {
      this.currentdvd = dvd;
      this.currentIndex = index;
    }
  
-   // Az összes tutoriál törlése
    removeAlldvds(): void {
      this.dvdService.deleteAll()
        .subscribe({
@@ -66,7 +57,6 @@ export class DvdListComponent {
        });
    }
  
-   // Cím alapján történő keresés
    searchTitle(): void {
      this.currentdvd = {};
      this.currentIndex = -1;
