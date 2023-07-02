@@ -9,27 +9,20 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  // A User objektumok tömbje
-  Users?: User[];
+   Users?: User[];
 
-  // Az aktuális tutoriál, amelyet kiválasztottunk
   currentUser: User = {};
 
-  // Az aktuális tutoriál indexe a tömbben
   currentIndex = -1;
 
-  // A keresés címe
   nev = '';
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    // Az ngOnInit() metódus futása a komponens inicializálásakor
-    // Az összes tutoriál lekérése
     this.retrieveUsers();
   }
 
-  // Az összes tutoriál lekérése
   retrieveUsers(): void {
     this.userService.getAll()
       .subscribe({
@@ -41,20 +34,17 @@ export class UserListComponent implements OnInit {
       });
   }
 
-  // Lista frissítése
   refreshList(): void {
     this.retrieveUsers();
     this.currentUser = {};
     this.currentIndex = -1;
   }
 
-  // Kiválasztott tutoriál beállítása
   setActiveUser(User: User, index: number): void {
     this.currentUser = User;
     this.currentIndex = index;
   }
 
-  // Az összes tutoriál törlése
   removeAllUsers(): void {
     this.userService.deleteAll()
       .subscribe({
@@ -66,7 +56,6 @@ export class UserListComponent implements OnInit {
       });
   }
 
-  // Cím alapján történő keresés
   searchTitle(): void {
     this.currentUser = {};
     this.currentIndex = -1;
