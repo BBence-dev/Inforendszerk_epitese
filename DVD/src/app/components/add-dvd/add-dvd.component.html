@@ -1,6 +1,6 @@
 <div>
     <div class="submit-form">
-      <div *ngIf="!submitted"><!-- Megjelenítés, ha 'submitted' változó értéke false -->
+      <div *ngIf="!submitted">
         <div class="form-group">
           <label for="cim">Cim</label>
           <input
@@ -10,7 +10,7 @@
             required
             [(ngModel)]="dvd.cim" 
             name="dvd"
-          /><!-- Adatkötés a 'user.title' adatmodellhez -->
+          />
         </div>
   
         <div class="form-group">
@@ -23,7 +23,7 @@
             [(ngModel)]="dvd.beDatum"
             name="beDatum"
           />
-          <!-- Adatkötés a 'user.description' adatmodellhez -->
+         
         </div>
   
         <div class="form-group">
@@ -35,7 +35,7 @@
             required
             [(ngModel)]="dvd.sorszam" 
             name="sorszam"
-          /><!-- Adatkötés a 'user.title' adatmodellhez -->
+          />
         </div>
 
         <div class="form-group">
@@ -44,16 +44,16 @@
           <option value="">Choose....</option>
           <option  *ngFor="let condition of condition"
             value="{{ condition }}">{{condition}}</option>
-         </select><!-- Adatkötés a 'user.title' adatmodellhez -->
+         </select>
         </div>
   
-        <button (click)="savedvd()" class="btn btn-success">Submit</button> <!-- Kattintás eseménykezelése. Ha a gombra kattintanak, meghívódik a 'saveuser()' nevű metódus -->
+        <button (click)="savedvd()" class="btn btn-success">Submit</button> 
      
       </div>
   
-      <div *ngIf="submitted"><!-- Megjelenítés, ha 'submitted' változó értéke true -->
+      <div *ngIf="submitted">
         <h4>user was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newdvd()">Add</button> <!-- Kattintás eseménykezelése. Ha a gombra kattintanak, meghívódik a 'newuser()' nevű metódus -->
+        <button class="btn btn-success" (click)="newdvd()">Add</button> 
      
       </div>
     </div>
