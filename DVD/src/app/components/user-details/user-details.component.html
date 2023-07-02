@@ -47,9 +47,7 @@
     <p>Please click on a user...</p>
   </div>
 </div>
-<!-- Az "editable" nevű ng-template az szerkeszthető részt tartalmazza.
-   Ha currentUser.id értéke igaz, 
-   akkor az adatok szerkeszthető formban jelennek meg egy űrlapon. -->
+
 <ng-template #editable>
   <div *ngIf="currentUser.id" class="edit-form">
     <h4>user</h4>
@@ -102,7 +100,7 @@
         let i = index"
         [class.active]="i == currentIndex"
         (click)="setActivedvd(dvd, i)">{{dvd.cim}}</option>
-       </select><!-- Adatkötés a 'user.title' adatmodellhez -->
+       </select>
     </div>
 
 
@@ -111,8 +109,6 @@
         {{ currentUser.condition ? "Törölt" : "Aktiv" }}
       </div>
     </form>
-<!-- Gombok az adatok frissítéséhez, törléséhez és publikáláshoz/elrejtéshez. -->
-
     <button
       class="badge badge-primary mr-2"
       *ngIf="currentUser.condition"
