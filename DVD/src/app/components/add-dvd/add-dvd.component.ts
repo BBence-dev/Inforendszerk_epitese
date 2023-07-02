@@ -18,14 +18,14 @@ export class AddDvdComponent {
     condition:''
     };
 
-  // submitted változó inicializálása hamis értékkel
+  
   submitted = false;
 
   constructor(private dvdService: DvdService) { }
 
-  // A tutoriál mentését végző függvény
+  
   savedvd(): void {
-    // Adatok összeállítása az űrlap mezőiből
+   
     const data = {
       cim: this.dvd.cim,
       beDatum: this.dvd.beDatum,
@@ -33,10 +33,7 @@ export class AddDvdComponent {
       condition: this.dvd.condition,
     };
 
-    // dvdService segítségével a dvdService.create metódust hívjuk meg, hogy létrehozzunk egy új tutoriált
-    // Az Observable-t visszaadó create metódusra feliratkozunk a subscribe() segítségével
-    // Ha a kérés sikeres, a next callback függvény fut le, és a választ kiírjuk a konzolra
-    // Ha hiba történik a kérés során, az error callback függvény fut le, és a hibát kiírjuk a konzolra
+   
     this.dvdService.create(data)
       .subscribe({
         next: (res) => {
@@ -47,7 +44,7 @@ export class AddDvdComponent {
       });
   }
 
-  // Az űrlapban megadott adatok törlése és a submitted változó visszaállítása
+  
   newdvd(): void {
     this.submitted = false;
     this.dvd = {
