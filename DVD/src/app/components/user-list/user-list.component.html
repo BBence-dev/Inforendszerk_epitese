@@ -1,0 +1,43 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="nev"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          (click)="searchTitle()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Users List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let User of Users; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveUser(User, i)"
+      >
+        {{ User.nev }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+      Remove All
+    </button>
+  </div>
+  <div class="col-md-6">
+    <app-user-details
+      [viewMode]="true"
+      [currentUser]="currentUser"
+    ></app-user-details>
+  </div>
+</div>

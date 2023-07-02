@@ -1,0 +1,127 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentdvd.id">
+      <h4>dvd</h4>
+      <div>
+        <label><strong>Cim:</strong></label>
+         {{ currentdvd.cim }}
+      </div>
+      <div>
+        <label><strong>Beszerzés dátuma:</strong></label>
+        {{ currentdvd.beDatum }}
+      </div>
+      <div>
+        <label><strong>Sorszám:</strong></label>
+         {{ currentdvd.sorszam }}
+      </div>
+      <div>
+        <label><strong>Státusz:</strong></label>
+         {{ currentdvd.condition }}
+      </div>
+      <div>
+        <label><strong>User:</strong></label>
+         {{ currentdvd.user }}
+      </div>
+      <div>
+        <label><strong>Kölcsönzött:</strong></label>
+         {{ currentdvd.createdAt }}
+      </div>
+      <div>
+        <label><strong>Frissitett:</strong></label>
+         {{ currentdvd.updatedAt }}
+      </div>
+  
+      <a
+        class="badge badge-warning"
+        routerLink="/Dvds/{{ currentdvd.id }}"
+      >
+        Edit
+      </a>
+    </div>
+  
+    <div *ngIf="!currentdvd">
+      <br />
+      <p>Please click on a dvd...</p>
+    </div>
+  </div>
+  <!-- Az "editable" nevű ng-template az szerkeszthető részt tartalmazza.
+     Ha currentdvd.id értéke igaz, 
+     akkor az adatok szerkeszthető formban jelennek meg egy űrlapon. -->
+  <ng-template #editable>
+    <div *ngIf="currentdvd.id" class="edit-form">
+      <h4>dvd</h4>
+      <form>
+        <div class="form-group">
+          <label for="cim">Cim</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cim"
+            [(ngModel)]="currentdvd.cim"
+            name="cim"
+          />
+        </div>
+        <div class="form-group">
+          <label for="beDatum">Bedatum</label>
+          <input
+            type="date"
+            class="form-control"
+            id="beDatum"
+            [(ngModel)]="currentdvd.beDatum"
+            name="beDatum"
+          />
+        </div>
+        <div class="form-group">
+          <label for="sorszam">Sorszám</label>
+          <input
+            type="text"
+            class="form-control"
+            id="sorszam"
+            [(ngModel)]="currentdvd.sorszam"
+            name="sorszam"
+          />
+        </div>
+       
+        <div class="form-group">
+            <label for="condition">Sátusz</label>
+           <select name="condition" id="condition" [(ngModel)]="currentdvd.condition" class="form-control">
+            <option value="">Choose....</option>
+            <option  *ngFor="let condition of condition"
+              value="{{ condition }}">{{condition}}</option>
+           </select><!-- Adatkötés a 'user.title' adatmodellhez -->
+        </div>
+        <div class="form-group">
+          <label for="user">User</label>
+          <input
+            type="text"
+            class="form-control"
+            id="user"
+            [(ngModel)]="currentdvd.user"
+            name="user"
+          />
+        </div>
+  
+  
+       
+      </form>
+  <!-- Gombok az adatok frissítéséhez, törléséhez és publikáláshoz/elrejtéshez. -->
+  
+      <button class="badge badge-danger mr-2" (click)="deletedvd()">
+        Delete
+      </button>
+  
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updatedvd()"
+      >
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+  
+    <div *ngIf="!currentdvd.id">
+      <br />
+      <p>Cannot access this dvd...</p>
+    </div>
+  </ng-template>
+  

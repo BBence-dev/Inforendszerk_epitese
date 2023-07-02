@@ -1,0 +1,149 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentUser.id">
+    <h4>user</h4>
+    <div>
+      <label><strong>Nev:</strong></label>
+       {{ currentUser.nev }}
+    </div>
+    <div>
+      <label><strong>Telefonszám:</strong></label>
+      {{ currentUser.telsz }}
+    </div>
+    <div>
+      <label><strong>Igazolványszám:</strong></label>
+       {{ currentUser.igsz }}
+    </div>
+    <div>
+      <label><strong>Lakcim:</strong></label>
+       {{ currentUser.lakcim }}
+    </div>
+    <div>
+      <label><strong>Dvd:</strong></label>
+       {{ currentUser.dvd }}
+    </div>
+    <div>
+      <label><strong>Kölcsönzött:</strong></label>
+       {{ currentUser.createdAt }}
+    </div>
+    <div>
+      <label><strong>Frissitett:</strong></label>
+       {{ currentUser.updatedAt }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentUser.condition ? "Törölt" : "Aktiv" }}
+    </div>
+
+    <a
+      class="badge badge-warning"
+      routerLink="/Users/{{ currentUser.id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentUser">
+    <br />
+    <p>Please click on a user...</p>
+  </div>
+</div>
+<!-- Az "editable" nevű ng-template az szerkeszthető részt tartalmazza.
+   Ha currentUser.id értéke igaz, 
+   akkor az adatok szerkeszthető formban jelennek meg egy űrlapon. -->
+<ng-template #editable>
+  <div *ngIf="currentUser.id" class="edit-form">
+    <h4>user</h4>
+    <form>
+      <div class="form-group">
+        <label for="nev">Nev</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nev"
+          [(ngModel)]="currentUser.nev"
+          name="nev"
+        />
+      </div>
+      <div class="form-group">
+        <label for="telsz">Telefonszam</label>
+        <input
+          type="number"
+          class="form-control"
+          id="telsz"
+          [(ngModel)]="currentUser.telsz"
+          name="telsz"
+        />
+      </div>
+      <div class="form-group">
+        <label for="igsz">Igazolványszám</label>
+        <input
+          type="text"
+          class="form-control"
+          id="igsz"
+          [(ngModel)]="currentUser.igsz"
+          name="igsz"
+        />
+      </div>
+      <div class="form-group">
+        <label for="lakcim">Lakcim</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lakcim"
+          [(ngModel)]="currentUser.lakcim"
+          name="lakcim"
+        />
+      </div>
+      <div class="form-group">
+        <label for="dvd">Dvd</label>
+       <select name="dvd" id="dvd" [(ngModel)]="currentUser.dvd" class="form-control">
+        <option value="">Choose....</option>
+        <option  *ngFor="let dvd of dvds;
+        let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActivedvd(dvd, i)">{{dvd.cim}}</option>
+       </select><!-- Adatkötés a 'user.title' adatmodellhez -->
+    </div>
+
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentUser.condition ? "Törölt" : "Aktiv" }}
+      </div>
+    </form>
+<!-- Gombok az adatok frissítéséhez, törléséhez és publikáláshoz/elrejtéshez. -->
+
+    <button
+      class="badge badge-primary mr-2"
+      *ngIf="currentUser.condition"
+      (click)="updatePublished(false)"
+    >
+      UnPublish
+    </button>
+    <button
+      *ngIf="!currentUser.condition"
+      class="badge badge-primary mr-2"
+      (click)="updatePublished(true)"
+    >
+      Publish
+    </button>
+
+    <button class="badge badge-danger mr-2" (click)="deleteuser()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateuser()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentUser.id">
+    <br />
+    <p>Cannot access this user...</p>
+  </div>
+</ng-template>

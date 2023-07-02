@@ -1,0 +1,61 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted"><!-- Megjelenítés, ha 'submitted' változó értéke false -->
+        <div class="form-group">
+          <label for="cim">Cim</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cim"
+            required
+            [(ngModel)]="dvd.cim" 
+            name="dvd"
+          /><!-- Adatkötés a 'user.title' adatmodellhez -->
+        </div>
+  
+        <div class="form-group">
+          <label for="beDatum">Beszerzés dátuma</label>
+          <input
+          type="date"
+            class="form-control"
+            id="beDatum"
+            required
+            [(ngModel)]="dvd.beDatum"
+            name="beDatum"
+          />
+          <!-- Adatkötés a 'user.description' adatmodellhez -->
+        </div>
+  
+        <div class="form-group">
+          <label for="sorszam">Sorozatszám</label>
+          <input
+            type="text"
+            class="form-control"
+            id="sorszam"
+            required
+            [(ngModel)]="dvd.sorszam" 
+            name="sorszam"
+          /><!-- Adatkötés a 'user.title' adatmodellhez -->
+        </div>
+
+        <div class="form-group">
+          <label for="condition">Sátusz</label>
+         <select name="condition" id="condition" [(ngModel)]="dvd.condition" class="form-control">
+          <option value="">Choose....</option>
+          <option  *ngFor="let condition of condition"
+            value="{{ condition }}">{{condition}}</option>
+         </select><!-- Adatkötés a 'user.title' adatmodellhez -->
+        </div>
+  
+        <button (click)="savedvd()" class="btn btn-success">Submit</button> <!-- Kattintás eseménykezelése. Ha a gombra kattintanak, meghívódik a 'saveuser()' nevű metódus -->
+     
+      </div>
+  
+      <div *ngIf="submitted"><!-- Megjelenítés, ha 'submitted' változó értéke true -->
+        <h4>user was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newdvd()">Add</button> <!-- Kattintás eseménykezelése. Ha a gombra kattintanak, meghívódik a 'newuser()' nevű metódus -->
+     
+      </div>
+    </div>
+  </div>
+  
