@@ -15,7 +15,6 @@ export class DvdListComponent {
  
    currentIndex = -1;
  
-   // A keresés címe
    nev = '';
  
    constructor(private dvdService: DvdService) { }
